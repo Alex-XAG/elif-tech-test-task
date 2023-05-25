@@ -1,3 +1,13 @@
+import React from 'react';
+import { Header } from './Header/Header';
+
+const NAVIGATION_PROPS = {
+  shops: 'Shops',
+  shopingCart: 'Shoping cart',
+  history: 'History',
+  coupons: 'Coupons',
+};
+
 export const App = () => {
   return (
     <div
@@ -5,12 +15,10 @@ export const App = () => {
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
+        width: '1200px',
       }}
     >
-      React homework template
+      <Header optionsNav={Object.values(NAVIGATION_PROPS)} />
     </div>
   );
 };
