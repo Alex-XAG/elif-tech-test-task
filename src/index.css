@@ -18,6 +18,6 @@ code {
     monospace;
 }
 
-/* .current {
-  color: rgb(172, 170, 170);
-} */
+.current {
+  color: rgb(230, 230, 230);
+}
