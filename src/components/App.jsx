@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from './Header/Header';
 import { Shops } from './Shops/Shops';
 import { articles } from './utils/articles';
+import { ShopingCart } from './ShopingCart/ShopingCart';
 
 const NAVIGATION_PROPS = {
   shops: 'Shops',
@@ -10,16 +11,30 @@ const NAVIGATION_PROPS = {
   coupons: 'Coupons',
 };
 
-
-
 export class App extends React.Component {
-  state={
-    articles:[...articles]
-  }
+  state = {
+    articles: [...articles],
+    productsSelected: [],
+  };
 
-  handleAddCartToShopingCart=()=> {
-    
-  }
+  handleAddCartToShopingCart = productId => {
+    const isProductInShopingCart = this.state.productsSelected.find(
+      product => product.id === productId
+    );
+
+    if (!isProductInShopingCart) {
+      const product = this.state.articles.find(
+        article => article.id === productId
+      );
+
+      this.setState(prevState => ({
+        productsSelected: [
+          ...prevState.productsSelected,
+          { ...product, quantity: 1 },
+        ],
+      }));
+    }
+  };
 
   render() {
     return (
@@ -33,7 +48,11 @@ export class App extends React.Component {
         }}
       >
         <Header optionsNav={Object.values(NAVIGATION_PROPS)} />
-        <Shops />
+        <Shops handleAddCartToShopingCart={this.handleAddCartToShopingCart} />
+        <ShopingCart
+          handleAddCartToShopingCart={this.handleAddCartToShopingCart}
+          productsSelected={this.state.productsSelected}
+        />
       </div>
     );
   }

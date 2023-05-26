@@ -66,7 +66,13 @@ export class Shops extends React.Component {
                   <PriceOrder>{title}</PriceOrder>
                   <Image src={urlImg} alt={title} width="320" height="210" />
                   <PriceOrder>Price: {price}$</PriceOrder>
-                  <BtnAdd>Add to Cart</BtnAdd>
+                  <BtnAdd
+                    onClick={() => this.props.handleAddCartToShopingCart(id)}
+                    name="adding"
+                    type="button"
+                  >
+                    Add to Cart
+                  </BtnAdd>
                 </Article>
               </ArticleItem>
             );
