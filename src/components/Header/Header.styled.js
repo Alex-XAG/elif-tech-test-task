@@ -48,10 +48,11 @@ export const SiteNavItem = styled.li`
   position: relative;
 `;
 
-export const SiteNavLink = styled.a`
+export const SiteNavLink = styled.p`
   display: block;
   padding-top: 24px;
   padding-bottom: 24px;
+  cursor: pointer;
 
   color: #212121;
 

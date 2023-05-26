@@ -9,18 +9,11 @@ import {
   SiteNavLink,
 } from './Header.styled';
 
-export const Header = ({ optionsNav }) => {
-  const toggle = evt => {
-    evt.preventDefault();
-    evt.target.classList.add('current');
-    setTimeout(() => {
-      evt.target.classList.remove('current');
-    }, 500);
-  };
+export const Header = ({ optionsNav, handleActivePage }) => {
   return (
     <header className="header">
       <HeaderContainer>
-        <Logo href="./index.html">
+        <Logo href="./">
           Delivery<HeadreLogo>Service</HeadreLogo>
         </Logo>
         <SiteNav>
@@ -28,9 +21,7 @@ export const Header = ({ optionsNav }) => {
             {optionsNav.map(option => {
               return (
                 <SiteNavItem key={option}>
-                  <SiteNavLink href="./index.html" onClick={toggle}>
-                    {option}
-                  </SiteNavLink>
+                  <SiteNavLink onClick={handleActivePage}>{option}</SiteNavLink>
                 </SiteNavItem>
               );
             })}

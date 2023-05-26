@@ -59,6 +59,9 @@ export class Shops extends React.Component {
 
         <ArticlesList>
           {articles.map(({ shop, id, title, urlImg, price }) => {
+            const isInShopingCart = this.props.productsSelected.find(
+              product => product.id === id
+            );
             return (
               <ArticleItem key={id}>
                 <Article>
@@ -68,10 +71,10 @@ export class Shops extends React.Component {
                   <PriceOrder>Price: {price}$</PriceOrder>
                   <BtnAdd
                     onClick={() => this.props.handleAddCartToShopingCart(id)}
-                    name="adding"
+                    isInShopingCart={isInShopingCart}
                     type="button"
                   >
-                    Add to Cart
+                    {isInShopingCart ? 'Ordered' : 'Add to order'}
                   </BtnAdd>
                 </Article>
               </ArticleItem>

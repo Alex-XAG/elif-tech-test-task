@@ -7,14 +7,13 @@ import { ShopingCart } from './ShopingCart/ShopingCart';
 const NAVIGATION_PROPS = {
   shops: 'Shops',
   shopingCart: 'Shoping cart',
-  history: 'History',
-  coupons: 'Coupons',
 };
 
 export class App extends React.Component {
   state = {
     articles: [...articles],
     productsSelected: [],
+    isActivePage: true,
   };
 
   handleAddCartToShopingCart = productId => {
@@ -36,6 +35,54 @@ export class App extends React.Component {
     }
   };
 
+  handleIncrementQuantityOfOrder = productId => {
+    const product = this.state.productsSelected.find(
+      product => product.id === productId
+    );
+    const updatedQuantity = this.state.productsSelected.map(item => {
+      if (product.id === item.id) {
+        return { ...item, quantity: (item.quantity += 1) };
+      }
+
+      return item;
+    });
+
+    this.setState({ productsSelected: updatedQuantity });
+  };
+
+  handleDecrementQuantityOfOrder = productId => {
+    const product = this.state.productsSelected.find(
+      product => product.id === productId
+    );
+
+    if (product.quantity <= 1) {
+      this.handleRemoveOrder(productId);
+      return;
+    }
+
+    const updatedQuantity = this.state.productsSelected.map(item => {
+      if (product.id === item.id) {
+        return { ...item, quantity: (item.quantity -= 1) };
+      }
+
+      return item;
+    });
+
+    this.setState({ productsSelected: updatedQuantity });
+  };
+
+  handleRemoveOrder = productId => {
+    const updatedOrder = this.state.productsSelected.filter(
+      product => product.id !== productId
+    );
+    this.setState({ productsSelected: updatedOrder });
+  };
+
+  handleActivePage = () => {
+    console.log('click');
+    this.setState(prevState => ({ isActivePage: !prevState.isActivePage }));
+  };
+
   render() {
     return (
       <div
@@ -47,12 +94,23 @@ export class App extends React.Component {
           width: '1300px',
         }}
       >
-        <Header optionsNav={Object.values(NAVIGATION_PROPS)} />
-        <Shops handleAddCartToShopingCart={this.handleAddCartToShopingCart} />
-        <ShopingCart
-          handleAddCartToShopingCart={this.handleAddCartToShopingCart}
-          productsSelected={this.state.productsSelected}
+        <Header
+          handleActivePage={this.handleActivePage}
+          optionsNav={Object.values(NAVIGATION_PROPS)}
         />
+        {this.state.isActivePage ? (
+          <Shops
+            productsSelected={this.state.productsSelected}
+            handleAddCartToShopingCart={this.handleAddCartToShopingCart}
+          />
+        ) : (
+          <ShopingCart
+            handleRemoveOrder={this.handleRemoveOrder}
+            handleIncrementQuantityOfOrder={this.handleIncrementQuantityOfOrder}
+            handleDecrementQuantityOfOrder={this.handleDecrementQuantityOfOrder}
+            productsSelected={this.state.productsSelected}
+          />
+        )}
       </div>
     );
   }
