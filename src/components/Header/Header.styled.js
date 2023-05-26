@@ -53,6 +53,7 @@ export const SiteNavLink = styled.p`
   padding-top: 24px;
   padding-bottom: 24px;
   cursor: pointer;
+  margin: 0;
 
   color: #212121;
 

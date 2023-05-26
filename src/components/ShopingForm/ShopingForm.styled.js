@@ -5,11 +5,12 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 20px;
   min-width: 400px;
-  margin: 30px;
+  min-height: 405px;
+  margin: 20px 30px;
   margin-right: 30px;
   padding: 20px;
 
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: rgb(230, 230, 230);
 `;
 export const Label = styled.label`
@@ -30,18 +31,25 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   display: flex;
-  background-color: rgb(230, 230, 230);
+  background-color: #fff;
   color: #000;
+
+  font-size: 24px;
 
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 30px;
+  height: 40px;
   border-radius: 15px;
   cursor: pointer;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  :hover {
-    background-color: #fff;
+
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  :hover,
+  :focus {
+    transform: scale(1.05);
+    background-color: rgb(230, 230, 230);
   }
 `;
 

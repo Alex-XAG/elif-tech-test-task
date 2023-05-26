@@ -13,7 +13,7 @@ export class App extends React.Component {
   state = {
     articles: [...articles],
     productsSelected: [],
-    isActivePage: true,
+    ActivePage: NAVIGATION_PROPS.shops,
   };
 
   handleAddCartToShopingCart = productId => {
@@ -78,9 +78,12 @@ export class App extends React.Component {
     this.setState({ productsSelected: updatedOrder });
   };
 
-  handleActivePage = () => {
-    console.log('click');
-    this.setState(prevState => ({ isActivePage: !prevState.isActivePage }));
+  handleActivePage = ({ target }) => {
+    this.setState({
+      ActivePage: Object.values(NAVIGATION_PROPS).filter(value => {
+        return value === target.textContent;
+      })[0],
+    });
   };
 
   render() {
@@ -98,12 +101,14 @@ export class App extends React.Component {
           handleActivePage={this.handleActivePage}
           optionsNav={Object.values(NAVIGATION_PROPS)}
         />
-        {this.state.isActivePage ? (
+        {this.state.ActivePage === NAVIGATION_PROPS.shops && (
           <Shops
             productsSelected={this.state.productsSelected}
             handleAddCartToShopingCart={this.handleAddCartToShopingCart}
           />
-        ) : (
+        )}
+
+        {this.state.ActivePage === NAVIGATION_PROPS.shopingCart && (
           <ShopingCart
             handleRemoveOrder={this.handleRemoveOrder}
             handleIncrementQuantityOfOrder={this.handleIncrementQuantityOfOrder}

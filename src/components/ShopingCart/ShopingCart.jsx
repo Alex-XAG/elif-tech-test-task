@@ -1,4 +1,6 @@
+import React from 'react';
 import { ShopingForm } from 'components/ShopingForm/ShopingForm';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 import {
   ShopingCartContainer,
   ShopingCartList,
@@ -7,6 +9,7 @@ import {
   OrderText,
   BtnDecIncr,
   BtnRemove,
+  ShopingCartTitle,
 } from './ShopingCart.styled';
 
 export const ShopingCart = ({
@@ -17,6 +20,7 @@ export const ShopingCart = ({
 }) => {
   return (
     <>
+      <ShopingCartTitle>Shoping cart</ShopingCartTitle>
       <ShopingCartContainer>
         <ShopingForm productsSelected={productsSelected} />
         <ShopingCartList>
@@ -36,13 +40,13 @@ export const ShopingCart = ({
                         type="button"
                         onClick={() => handleDecrementQuantityOfOrder(id)}
                       >
-                        -
+                        <FaMinus />
                       </BtnDecIncr>
                       <BtnDecIncr
                         type="button"
                         onClick={() => handleIncrementQuantityOfOrder(id)}
                       >
-                        +
+                        <FaPlus />
                       </BtnDecIncr>
                     </div>
 
