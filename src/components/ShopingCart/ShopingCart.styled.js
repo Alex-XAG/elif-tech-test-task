@@ -26,6 +26,7 @@ export const ShopingCartArticle = styled.article`
   align-items: center;
   flex-direction: column;
   min-width: 200px;
+  min-height: 400px;
   gap: 5px;
   border: 1px solid rgb(230, 230, 230);
   border-radius: 15px;
