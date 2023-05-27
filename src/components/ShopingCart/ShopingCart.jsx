@@ -10,6 +10,7 @@ import {
   BtnDecIncr,
   BtnRemove,
   ShopingCartTitle,
+  EmptyShopingCart,
 } from './ShopingCart.styled';
 
 export const ShopingCart = ({
@@ -62,7 +63,9 @@ export const ShopingCart = ({
             }
           )}
 
-          {productsSelected.length === 0 && <h1>There is no orders !!!</h1>}
+          {productsSelected.length === 0 && (
+            <EmptyShopingCart>There is no orders !!!</EmptyShopingCart>
+          )}
         </ShopingCartList>
       </ShopingCartContainer>
     </>

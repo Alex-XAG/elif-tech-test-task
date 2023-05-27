@@ -27,8 +27,8 @@ export const ShopingCartList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 20px;
-  max-height: 410px;
-  max-width: 730px;
+  height: 410px;
+  width: 730px;
   overflow-y: scroll;
 `;
 
@@ -96,4 +96,8 @@ export const BtnRemove = styled.button`
     transform: scale(0.9);
     background-color: #fff;
   }
+`;
+
+export const EmptyShopingCart = styled.h1`
+  height: 50px;
 `;

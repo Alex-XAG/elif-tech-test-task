@@ -31,6 +31,12 @@ export class Shops extends React.Component {
     this.setState({ articles: [...articles] });
   };
 
+  handleOrderShop = shop => {
+    const filteredShops = articles.filter(article => article.shop === shop);
+
+    this.setState({ articles: [...filteredShops] });
+  };
+
   render() {
     return (
       <ShopsContainer>
@@ -59,7 +65,7 @@ export class Shops extends React.Component {
           handleAddCartToShopingCart={this.props.handleAddCartToShopingCart}
           productsSelected={this.props.productsSelected}
           articles={this.state.articles}
-          handleShopChoice={this.handleShopChoice}
+          handleOrderShop={this.handleOrderShop}
         />
       </ShopsContainer>
     );

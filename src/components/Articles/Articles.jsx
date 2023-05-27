@@ -13,6 +13,7 @@ export const Articles = ({
   articles,
   productsSelected,
   handleAddCartToShopingCart,
+  handleOrderShop,
 }) => {
   return (
     <ArticlesList>
@@ -20,6 +21,7 @@ export const Articles = ({
         const isInShopingCart = productsSelected.find(
           product => product.id === id
         );
+
         return (
           <ArticleItem key={id}>
             <Article>
@@ -28,7 +30,10 @@ export const Articles = ({
               <Image src={urlImg} alt={title} width="320" height="210" />
               <PriceOrder>Price: {price}$</PriceOrder>
               <BtnAdd
-                onClick={() => handleAddCartToShopingCart(id)}
+                onClick={() => {
+                  handleOrderShop(shop);
+                  return handleAddCartToShopingCart(id);
+                }}
                 isInShopingCart={isInShopingCart}
                 type="button"
               >
