@@ -17,7 +17,10 @@ const INITIAL_STATE = {
 };
 
 export class ShopingForm extends React.Component {
-  state = { ...INITIAL_STATE };
+  state = {
+    ...INITIAL_STATE,
+    historyArr: [],
+  };
 
   handleChange = e => {
     const { name, value, checked, type } = e.target;
@@ -28,13 +31,28 @@ export class ShopingForm extends React.Component {
 
   handleSubmitOrder = e => {
     e.preventDefault();
+    // const historyArrToAdd = this.handleCreateHistoryArrItem();
+
+    // this.setState(prevState => {
+    //   if (prevState.historyArr.length === 0) {
+    //     return { historyArr: historyArrToAdd };
+    //   }
+    //   console.log(this.state.historyArr);
+    //   return { historyArr: prevState.historyArr, historyArrToAdd };
+    // });
 
     console.log(this.state);
+
     this.reset();
   };
 
   reset = () => {
     this.setState({ ...INITIAL_STATE });
+  };
+
+  handleCreateHistoryArrItem = () => {
+    const historyArrItem = [...this.props.productsSelected, this.state];
+    return historyArrItem;
   };
 
   render() {
