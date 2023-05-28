@@ -34,7 +34,7 @@ export class Shops extends React.Component {
   handleOrderShop = shop => {
     const filteredShops = articles.filter(article => article.shop === shop);
 
-    this.setState({ articles: [...filteredShops] });
+    this.setState({ articles: [...filteredShops], shops: [shop] });
   };
 
   render() {
