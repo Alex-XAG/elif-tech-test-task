@@ -23,7 +23,11 @@ const INITIAL_STATE = {
 };
 
 export class ShopingCart extends React.Component {
-  state = { ...INITIAL_STATE, historyArr: [this.props.productsSelected] };
+  state = {
+    ...INITIAL_STATE,
+    productsSelected: [...this.props.productsSelected],
+    historyArr: [this.props.productsSelected],
+  };
 
   handleSubmitOrder = e => {
     e.preventDefault();
@@ -35,7 +39,7 @@ export class ShopingCart extends React.Component {
     console.log(this.state);
 
     // localStorage.setItem('Client contacts', JSON.stringify(this.state));
-
+    this.handleClearArr();
     this.reset();
   };
 
@@ -55,12 +59,17 @@ export class ShopingCart extends React.Component {
     this.setState({ [name]: newValue });
   };
 
+  handleClearArr = () => {
+    console.log(this.state.productsSelected);
+    const emptyArr = [];
+    this.setState({ productsSelected: emptyArr });
+  };
+
   render() {
     const {
       handleIncrementQuantityOfOrder,
       handleDecrementQuantityOfOrder,
       handleRemoveOrder,
-      productsSelected,
     } = this.props;
     return (
       <>
@@ -70,10 +79,10 @@ export class ShopingCart extends React.Component {
             options={this.state}
             handleChange={this.handleChange}
             handleSubmitOrder={this.handleSubmitOrder}
-            productsSelected={productsSelected}
+            productsSelected={this.state.productsSelected}
           />
           <ShopingCartList>
-            {productsSelected.map(
+            {this.state.productsSelected.map(
               ({ id, shop, urlImg, title, price, quantity }) => {
                 return (
                   <li key={id}>
@@ -111,7 +120,7 @@ export class ShopingCart extends React.Component {
               }
             )}
 
-            {productsSelected.length === 0 && (
+            {this.state.productsSelected.length === 0 && (
               <EmptyShopingCart>There is no orders !!!</EmptyShopingCart>
             )}
           </ShopingCartList>
