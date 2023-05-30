@@ -25,7 +25,6 @@ const INITIAL_STATE = {
 export class ShopingCart extends React.Component {
   state = {
     ...INITIAL_STATE,
-    productsSelected: [...this.props.productsSelected],
     historyArr: [this.props.productsSelected],
   };
 
@@ -70,6 +69,7 @@ export class ShopingCart extends React.Component {
       handleIncrementQuantityOfOrder,
       handleDecrementQuantityOfOrder,
       handleRemoveOrder,
+      productsSelected,
     } = this.props;
     return (
       <>
@@ -79,10 +79,10 @@ export class ShopingCart extends React.Component {
             options={this.state}
             handleChange={this.handleChange}
             handleSubmitOrder={this.handleSubmitOrder}
-            productsSelected={this.state.productsSelected}
+            productsSelected={productsSelected}
           />
           <ShopingCartList>
-            {this.state.productsSelected.map(
+            {productsSelected.map(
               ({ id, shop, urlImg, title, price, quantity }) => {
                 return (
                   <li key={id}>
@@ -120,7 +120,7 @@ export class ShopingCart extends React.Component {
               }
             )}
 
-            {this.state.productsSelected.length === 0 && (
+            {productsSelected.length === 0 && (
               <EmptyShopingCart>There is no orders !!!</EmptyShopingCart>
             )}
           </ShopingCartList>
