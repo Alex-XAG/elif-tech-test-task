@@ -13,7 +13,7 @@ export class App extends React.Component {
   state = {
     articles: [...articles],
     productsSelected: [],
-    ActivePage: NAVIGATION_PROPS.shops,
+    activePage: NAVIGATION_PROPS.shops,
   };
 
   handleAddCartToShopingCart = productId => {
@@ -78,15 +78,23 @@ export class App extends React.Component {
     this.setState({ productsSelected: updatedOrder });
   };
 
+  handleClearArr = () => {
+    console.log(this.state.productsSelected);
+    const emptyArr = [];
+    this.setState({ productsSelected: emptyArr });
+  };
+
   handleActivePage = ({ target }) => {
     this.setState({
-      ActivePage: Object.values(NAVIGATION_PROPS).filter(value => {
+      activePage: Object.values(NAVIGATION_PROPS).filter(value => {
         return value === target.textContent;
       })[0],
     });
   };
 
   render() {
+    const { productsSelected, activePage } = this.state;
+
     return (
       <div
         style={{
@@ -101,19 +109,20 @@ export class App extends React.Component {
           handleActivePage={this.handleActivePage}
           optionsNav={Object.values(NAVIGATION_PROPS)}
         />
-        {this.state.ActivePage === NAVIGATION_PROPS.shops && (
+        {activePage === NAVIGATION_PROPS.shops && (
           <Shops
-            productsSelected={this.state.productsSelected}
+            productsSelected={productsSelected}
             handleAddCartToShopingCart={this.handleAddCartToShopingCart}
           />
         )}
 
-        {this.state.ActivePage === NAVIGATION_PROPS.shopingCart && (
+        {activePage === NAVIGATION_PROPS.shopingCart && (
           <ShopingCart
+            handleClearArr={this.handleClearArr}
             handleRemoveOrder={this.handleRemoveOrder}
             handleIncrementQuantityOfOrder={this.handleIncrementQuantityOfOrder}
             handleDecrementQuantityOfOrder={this.handleDecrementQuantityOfOrder}
-            productsSelected={this.state.productsSelected}
+            productsSelected={productsSelected}
           />
         )}
       </div>

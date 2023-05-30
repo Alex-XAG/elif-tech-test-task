@@ -38,7 +38,7 @@ export class ShopingCart extends React.Component {
     console.log(this.state);
 
     // localStorage.setItem('Client contacts', JSON.stringify(this.state));
-    this.handleClearArr();
+    this.props.handleClearArr();
     this.reset();
   };
 
@@ -56,12 +56,6 @@ export class ShopingCart extends React.Component {
 
     const newValue = type === 'checkbox' ? checked : value;
     this.setState({ [name]: newValue });
-  };
-
-  handleClearArr = () => {
-    console.log(this.state.productsSelected);
-    const emptyArr = [];
-    this.setState({ productsSelected: emptyArr });
   };
 
   render() {
